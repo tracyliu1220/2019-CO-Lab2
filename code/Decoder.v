@@ -15,7 +15,8 @@ module Decoder(
 	ALU_op_o,
 	ALUSrc_o,
 	RegDst_o,
-	Branch_o
+	Branch_o,
+	SE_o
 	);
      
 //I/O ports
@@ -26,6 +27,7 @@ output [3-1:0] ALU_op_o;
 output         ALUSrc_o;
 output         RegDst_o;
 output         Branch_o;
+output         SE_o;
  
 //Internal Signals
 reg    [3-1:0] ALU_op_o;
@@ -33,11 +35,45 @@ reg            ALUSrc_o;
 reg            RegWrite_o;
 reg            RegDst_o;
 reg            Branch_o;
+reg            SE_o;
 
 //Parameter
 
 
 //Main function
+always@(*) begin
+  case (instr_op_i[3:2])
+    2'b00: begin // R-format
+      ALU_op_o <= 3'b000
+      ALUSrc_o <= 0
+      Branch_o <= 0
+      RegWrite_o <= 1
+      RegDst_o <= 1
+    end
+    2'b01: begin // Branch
+      ALU_op_o <= 3'b001
+      ALUSrc_o <= 0
+      Branch_o <= 1
+      RegWrite_o <= 0
+    end
+    default: begin // I-format
+      ALUSrc_o <= 1
+      Branch_o <= 0
+      RegWrite_o <= 1
+      RegDst_o <= 0
+      if (instr_op_i == 6'b001011) ALU_op_o <= 3'b001;
+      if (instr_op_i == 6'b001111) ALU_op_o <= 3'b011;
+      if (instr_op_i == 6'b001101) ALU_op_o <= 3'b100;
+    end
+  endcase
+  case (instr_op_i)
+    6'b001000: SE_o <= 1;
+    6'b001011: SE_o <= 0;
+    6'b000100: SE_o <= 0;
+    6'b001111: SE_o <= 1;
+    6'b001101: SE_o <= 1;
+  endcase
+end
 
 endmodule
 
