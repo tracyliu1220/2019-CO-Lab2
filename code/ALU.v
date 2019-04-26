@@ -2,11 +2,11 @@
 //--------------------------------------------------------------------------------
 //Version:     1
 //--------------------------------------------------------------------------------
-//Writer:      
+//Writer:      Tracy Liu
 //----------------------------------------------
-//Date:        
+//Date:        2019.4.26
 //----------------------------------------------
-//Description: 
+//Description: using 32-bit ALU
 //--------------------------------------------------------------------------------
 
 module ALU(
@@ -32,6 +32,18 @@ wire             zero_o;
 //Parameter
 
 //Main function
+always@(ctrl_i, src1_i, src2_i) begin
+    case (ctrl_i)
+        0:  result_o <= src1_i & src2_i;
+        1:  result_o <= src1_i | src2_i;
+        2:  result_o <= src1_i + src2_i;
+        6:  result_o <= src1_i - src2_i;
+        7:  result_o <= src1_i < src2_i ? 1 : 0;
+        12: result_o <= ~(src1_i | src2_i); // nor
+        default: result_o <= 0;
+    endcase
+end
+assign zero_o = (result_o == 0);
 
 endmodule
 
