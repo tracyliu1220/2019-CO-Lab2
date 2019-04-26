@@ -10,5 +10,5 @@
 - [ ] MUX_2to1
 - [x] ProgramCounter (default finished)
 - [x] Reg_File (default finished)
-- [ ] Shift_Left_Two_32
+- [x] Shift_Left_Two_32 (Tracy Liu)
 - [ ] Sign_Extend
