@@ -3,7 +3,7 @@
 
 ## TODO
 - [x] ALU (Tracy Liu)
-- [ ] ALU_Ctrl
+- [x] ALU_Ctrl
 - [ ] Adder
 - [ ] Decoder
 - [x] Instr_Memory (default finished)
