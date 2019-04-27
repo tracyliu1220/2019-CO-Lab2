@@ -4,11 +4,11 @@
 ## TODO
 - [x] ALU (Tracy Liu)
 - [x] ALU_Ctrl
-- [ ] Adder
+- [x] Adder (Chieh Nien)
 - [ ] Decoder
 - [x] Instr_Memory (default finished)
-- [ ] MUX_2to1
+- [x] MUX_2to1 (Chieh Nien)
 - [x] ProgramCounter (default finished)
 - [x] Reg_File (default finished)
 - [x] Shift_Left_Two_32 (Tracy Liu)
-- [ ] Sign_Extend
+- [x] Sign_Extend (Chieh Nien)
