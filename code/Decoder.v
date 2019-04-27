@@ -44,23 +44,23 @@ reg            SE_o;
 always@(*) begin
   case (instr_op_i[3:2])
     2'b00: begin // R-format
-      ALU_op_o <= 3'b000
-      ALUSrc_o <= 0
-      Branch_o <= 0
-      RegWrite_o <= 1
-      RegDst_o <= 1
+      ALU_op_o <= 3'b000;
+      ALUSrc_o <= 0;
+      Branch_o <= 0;
+      RegWrite_o <= 1;
+      RegDst_o <= 1;
     end
     2'b01: begin // Branch
-      ALU_op_o <= 3'b001
-      ALUSrc_o <= 0
-      Branch_o <= 1
-      RegWrite_o <= 0
+      ALU_op_o <= 3'b001;
+      ALUSrc_o <= 0;
+      Branch_o <= 1;
+      RegWrite_o <= 0;
     end
     default: begin // I-format
-      ALUSrc_o <= 1
-      Branch_o <= 0
-      RegWrite_o <= 1
-      RegDst_o <= 0
+      ALUSrc_o <= 1;
+      Branch_o <= 0;
+      RegWrite_o <= 1;
+      RegDst_o <= 0;
       if (instr_op_i == 6'b001011) ALU_op_o <= 3'b001;
       if (instr_op_i == 6'b001111) ALU_op_o <= 3'b011;
       if (instr_op_i == 6'b001101) ALU_op_o <= 3'b100;
