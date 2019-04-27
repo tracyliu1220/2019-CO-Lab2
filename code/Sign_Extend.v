@@ -27,7 +27,11 @@ reg     [32-1:0] data_o;
 always @(*)begin
     if(enable)begin
         data_o[15:0] = data_i;
-        data_o[31:0] = {16{data_i[15]}};
+        data_o[31:16] = {16{data_i[15]}};
+    end
+    else if(!enable)begin
+        data_o[15:0] = data_i;
+        data_o[31:16] = 16'd0;
     end
 end
           
