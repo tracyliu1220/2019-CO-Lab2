@@ -70,9 +70,10 @@ always@(*) begin
   case (instr_op_i)
     6'b001000: SE_o <= 1;
     6'b001011: SE_o <= 0;
-    6'b000100: SE_o <= 0;
+    6'b000100: SE_o <= 1;
     6'b001111: SE_o <= 1;
     6'b001101: SE_o <= 1;
+    6'b000101: SE_o <= 1;
   endcase
 end
 
