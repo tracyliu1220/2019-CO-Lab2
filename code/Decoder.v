@@ -44,7 +44,7 @@ reg            SE_o;
 always@(*) begin
   case (instr_op_i[3:2])
     2'b00: begin // R-format
-      ALU_op_o <= 3'b000;
+      ALU_op_o <= 3'b010;
       ALUSrc_o <= 0;
       Branch_o <= 0;
       RegWrite_o <= 1;
