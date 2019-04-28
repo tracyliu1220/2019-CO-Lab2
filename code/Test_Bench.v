@@ -16,15 +16,15 @@ module TestBench;
 //Internal Signals
 reg         CLK;
 reg         RST;
-wire  [32-1:0] instr;
+//wire  [32-1:0] instr;
 integer     count;
 integer     handle;
 integer     end_count;
 //Greate tested modle  
 Simple_Single_CPU cpu(
         .clk_i(CLK),
-		.rst_i(RST),
-		.instr(instr)
+		.rst_i(RST)//,
+//		.instr(instr)
 		);
  
 //Main function
@@ -39,7 +39,7 @@ initial  begin
 	CLK = 0;
     RST = 0;
 	count = 0;
-    end_count=25;
+    end_count=7;
     #(`CYCLE_TIME)      RST = 1;
     #(`CYCLE_TIME*`END_COUNT)	$fclose(handle); $finish;
 end

@@ -58,7 +58,7 @@ Reg_File RF(
         .RSaddr_i(instr[25:21]) ,  
         .RTaddr_i(instr[20:16]) ,  
         .RDaddr_i(RDaddr) ,  
-        .RDdata_i(RDdata_i)  , 
+        .RDdata_i(ALU_result)  , 
         .RegWrite_i (RegWrite),
         .RSdata_o(RSdata_o) ,  
         .RTdata_o(RTdata_o)   

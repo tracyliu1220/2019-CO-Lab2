@@ -51,7 +51,8 @@ always@(*) begin
       RegDst_o <= 1;
     end
     2'b01: begin // Branch
-      ALU_op_o <= 3'b001;
+      if (instr_op_i == 6'b000100) ALU_op_o <= 3'b001; // beq
+      if (instr_op_i == 6'b000101) ALU_op_o <= 3'b101; // bne
       ALUSrc_o <= 0;
       Branch_o <= 1;
       RegWrite_o <= 0;
@@ -61,10 +62,10 @@ always@(*) begin
       Branch_o <= 0;
       RegWrite_o <= 1;
       RegDst_o <= 0;
+      if (instr_op_i == 6'b001000) ALU_op_o <= 3'b000; // addi
       if (instr_op_i == 6'b001011) ALU_op_o <= 3'b110; // sltiu
       if (instr_op_i == 6'b001111) ALU_op_o <= 3'b011; // lui
       if (instr_op_i == 6'b001101) ALU_op_o <= 3'b100; // ori
-      if (instr_op_i == 6'b000101) ALU_op_o <= 3'b101; // bne
     end
   endcase
   case (instr_op_i)
