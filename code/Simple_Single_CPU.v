@@ -10,13 +10,15 @@
 //--------------------------------------------------------------------------------
 module Simple_Single_CPU(
         clk_i,
-		rst_i//,
+		rst_i,
+		ALU_result
 		//instr
 		);
 		
 //I/O port
 input         clk_i;
 input         rst_i;
+output [32-1:0] ALU_result;
 //output [32-1:0]instr;
 //Internal Signles
 wire [32-1:0] PC_i, PC_o, RSdata_o, RTdata_o, ALU_result, instr, shift_o;
