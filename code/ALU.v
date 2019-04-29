@@ -39,7 +39,7 @@ always@(ctrl_i, src1_i, src2_i) begin
         2:  result_o <= src1_i + src2_i;
         6:  result_o <= src1_i - src2_i;
         7:  result_o <= src1_i < src2_i ? 1 : 0;
-        8:  result_o <= src1_i >>> src2_i;  // shift right
+        8:  result_o <= $signed(src1_i) >>> src2_i;  // shift right
         9:  result_o <= src2_i << 16;       // lui
         10: result_o <= src1_i - src2_i;    // bne
         12: result_o <= ~(src1_i | src2_i); // nor
