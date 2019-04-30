@@ -16,17 +16,13 @@ module TestBench;
 //Internal Signals
 reg         CLK;
 reg         RST;
-wire [32-1:0] ALU_result;
-//wire  [32-1:0] instr;
 integer     count;
 integer     handle;
 integer     end_count;
 //Greate tested modle  
 Simple_Single_CPU cpu(
         .clk_i(CLK),
-		.rst_i(RST),
-		.ALU_result(ALU_result)
-//		.instr(instr)
+		.rst_i(RST)
 		);
  
 //Main function

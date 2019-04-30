@@ -3,9 +3,9 @@
 
 ## TODO
 - [x] ALU (Tracy Liu)
-- [x] ALU_Ctrl
+- [x] ALU_Ctrl (Tracy Liu)
 - [x] Adder (Chieh Nien)
-- [ ] Decoder
+- [x] Decoder (Tracy Liu)
 - [x] Instr_Memory (default finished)
 - [x] MUX_2to1 (Chieh Nien)
 - [x] ProgramCounter (default finished)
