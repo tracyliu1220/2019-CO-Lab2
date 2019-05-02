@@ -1,7 +1,9 @@
-# 2019-CO-Lab2
-2019 Spring NCTU Computer Organization Lab2
+# 2019-CO-Labs
+2019 Spring NCTU Computer Organization Labs
 
-## TODO
+## Lab2
+
+### TODO
 - [x] ALU (Tracy Liu)
 - [x] ALU_Ctrl (Tracy Liu)
 - [x] Adder (Chieh Nien)
