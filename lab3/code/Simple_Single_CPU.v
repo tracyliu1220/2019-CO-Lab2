@@ -22,7 +22,14 @@ wire [32-1:0] PC_4, RDdata_i, se_o, Mux_src, PC_b, se_sa_o, RSdata_o_temp;
 wire [5-1:0] RDaddr;
 wire [4-1:0] ALU_Ctrl;
 wire [3-1:0] ALUop;
-wire RegDst, RegWrite, ALUsrc, branch, enable, zero, shift_o_de;
+wire RegDst, RegWrite, ALUsrc, branch, enable, zero, shift_o_de, BranchType, B_Ctrl;
+
+//Internal Signles for Lab3
+wire [27:0] shift_28_o;
+wire [31:0] jump_addr, PC_temp_i, Mem_Mux_o, DM_o;
+wire MemRead, MemWrite, MemtoReg, jump;
+
+assign jump_addr = {PC_4[31:28], shift_28_o};
 
 //Greate componentes
 ProgramCounter PC(
@@ -56,7 +63,7 @@ Reg_File RF(
         .RSaddr_i(instr[25:21]) ,  
         .RTaddr_i(instr[20:16]) ,  
         .RDaddr_i(RDaddr) ,  
-        .RDdata_i(ALU_result)  , 
+        .RDdata_i(Mem_Mux_o)  , 
         .RegWrite_i (RegWrite),
         .RSdata_o(RSdata_o_temp) ,  
         .RTdata_o(RTdata_o)   
@@ -71,7 +78,12 @@ Decoder Decoder(
 	    .RegDst_o(RegDst),   
 		.Branch_o(branch),
 		.shift_o(shift_o_de),
-		.SE_o(enable)   
+		.SE_o(enable),
+		.MemRead_o(MemRead),
+        .MemWrite_o(MemWrite),
+        .MemtoReg(MemtoReg),
+        .Jump_o(jump),
+        .BranchType(BranchType)   
 	    );
 
 Sign_Extend #(.size(5)) SE_sa(
@@ -128,9 +140,45 @@ Shift_Left_Two_32 Shifter(
 MUX_2to1 #(.size(32)) Mux_PC_Source(
         .data0_i(PC_4),
         .data1_i(PC_b),
-        .select_i(branch & zero),
-        .data_o(PC_i)
+        .select_i(branch & B_Ctrl),
+        .data_o(PC_temp_i)
         );	
+        
+///////////////// New for Lab 3	 /////////////   
+B_Control BC(
+        .zero_i(zero),
+        .result_i(ALU_result),
+        .BranchType(BranchType),
+        .control_o(B_Ctrl)
+        );
+
+Shift_Left_26_to_28 Shifter_26_to_28(
+        .data_i(instr[25:0]),
+        .data_o(shift_28_o)
+        );
+
+Data_Memory DM(
+        .clk_i(clk_i),
+        .addr_i(ALU_result),
+        .data_i(RTdata_o),
+        .MemRead_i(MemRead),
+        .MemWrite_i(MemWrite),
+        .data_o(DM_o)
+        );
+
+MUX_2to1 #(.size(32)) Mux_PC_final(
+        .data0_i(jump_addr),
+        .data1_i(PC_temp_i),
+        .select_i(jump),
+        .data_o(PC_i)
+        );
+        
+MUX_2to1 #(.size(32)) Memory_MUX(
+        .data0_i(ALU_result),
+        .data1_i(DM_o),
+        .select_i(MemtoReg),
+        .data_o(Mem_Mux_o)
+        );
 
 endmodule
 		  

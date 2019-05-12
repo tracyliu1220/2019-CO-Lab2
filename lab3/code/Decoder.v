@@ -18,7 +18,12 @@ module Decoder(
 	RegDst_o,
 	Branch_o,
 	shift_o,
-	SE_o
+	SE_o,
+	MemRead_o,
+	MemWrite_o,
+	MemtoReg,
+	Jump_o,
+	BranchType
 	);
      
 //I/O ports
@@ -32,6 +37,13 @@ output         RegDst_o;
 output         Branch_o;
 output         shift_o;
 output         SE_o;
+
+//for Lab3
+output	       MemRead_o;
+output     	   MemWrite_o;
+output     	   MemtoReg;
+output     	   Jump_o;
+output 	       BranchType;
  
 //Internal Signals
 reg    [3-1:0] ALU_op_o;
