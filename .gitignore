@@ -1,7 +1,4 @@
-*
-!.gitignore
-!*.pdf
-!*.md
-!*.v
-!*.txt
-!*.docx
+lab2/*
+lab3/code/*
+!lab3/code/*.v
+!lab3/code/*.txt
