@@ -19,18 +19,20 @@ module B_Control(
 //I/O ports
 input         zero_i;
 input  [31:0] result_i;
-input   [2:0] BranchType;
+input   [1:0] BranchType;
 output        control_o;  
 
 //Internal Signals
-wire          control_o
+reg    signed result_i;
+wire          control_o;
 
 //Main function
 always@(*) begin
   case (BranchType)
-    0: control_o = zero_i; // beq, bne, bnez
-    1: control_o = result_i; // ble
-    2: control_o = (result_i < 0); // bltz
+    0: control_o = zero_i;   // beq
+    1: control_o = ~zero_i;  // bne, bnez
+    2: control_o = result_i; // ble
+    3: control_o = (result_i < 0); // bltz
   endcase
 end
 

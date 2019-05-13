@@ -50,17 +50,36 @@ reg    [3-1:0] ALU_op_o;
 reg            ALUSrc_o;
 reg            RegWrite_o;
 reg            RegDst_o;
-reg            Branch_o;
+reg    [2-1:0] Branch_o;
 reg            shift_o;
 reg            SE_o;
+reg    [3-1:0] type;
 
 //Parameter
 
 
 //Main function
 always@(*) begin
-  case (instr_op_i[3:2])
-    2'b00: begin // R-format
+  case (instr_op_i)
+    // R
+    6'b000000: type <= 0;
+    // B
+    6'b000100: type <= 1;
+    6'b000101: type <= 1;
+    // I
+    6'b001000: type <= 2;
+    6'b001011: type <= 2;
+    6'b001111: type <= 2;
+    6'b001101: type <= 2;
+
+    6'b100011: type <= 3; // lw
+    6'b101011: type <= 4; // sw
+
+    6'b000010: type <= 5; // j
+    6'b000011: type <= 5; // jal
+  endcase
+  case (type)
+    0: begin // R-format
       if(funct == 6'b000011) shift_o <= 1;
       else shift_o <= 0;
       ALU_op_o <= 3'b010;
@@ -69,7 +88,7 @@ always@(*) begin
       RegWrite_o <= 1;
       RegDst_o <= 1;
     end
-    2'b01: begin // Branch
+    1: begin // Branch
       if (instr_op_i == 6'b000100) ALU_op_o <= 3'b001; // beq
       if (instr_op_i == 6'b000101) ALU_op_o <= 3'b101; // bne
       ALUSrc_o <= 0;
@@ -77,7 +96,7 @@ always@(*) begin
       RegWrite_o <= 0;
       shift_o <= 0;
     end
-    default: begin // I-format
+    2: begin // I-format
       ALUSrc_o <= 1;
       Branch_o <= 0;
       RegWrite_o <= 1;

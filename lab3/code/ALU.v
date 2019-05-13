@@ -37,17 +37,15 @@ always@(ctrl_i, src1_i, src2_i) begin
         0:  result_o <= src1_i & src2_i; // bltz
         1:  result_o <= src1_i | src2_i;
         2:  result_o <= src1_i + src2_i;
-        6:  result_o <= src1_i - src2_i;
-        7:  result_o <= src1_i < src2_i ? 1 : 0;
+        6:  result_o <= src1_i - src2_i; // beq, bne, bnez
+        7:  result_o <= $signed(src1_i) < $signed(src2_i) ? 1 : 0;
         8:  result_o <= $signed(src2_i) >>> src1_i;  // shift right
         9:  result_o <= src2_i << 16;       // lui
-        10: result_o <= src1_i - src2_i;    // bne, bnez
-        11: result_o <= ~(src1_i > src2_i); // ble
+        11: result_o <= ~($signed(src1_i) > $signed(src2_i)); // ble
         12: result_o <= ~(src1_i | src2_i); // nor
         default: result_o <= 0;
     endcase
 end
-assign zero_o = (result_o == 0) ^ (ctrl_i == 10);
 
 endmodule
 
