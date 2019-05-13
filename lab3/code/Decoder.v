@@ -33,7 +33,7 @@ input  [6-1:0] funct;
 output         RegWrite_o;
 output [3-1:0] ALU_op_o;
 output         ALUSrc_o;
-output         RegDst_o;
+output   [1:0] RegDst_o;
 output         Branch_o;
 output         shift_o;
 output         SE_o;
@@ -41,15 +41,15 @@ output         SE_o;
 //for Lab3
 output	       MemRead_o;
 output     	   MemWrite_o;
-output     	   MemtoReg;
-output     	   Jump_o;
-output 	       BranchType;
+output   [1:0] MemtoReg;
+output   [1:0] Jump_o;
+output 	 [1:0] BranchType;
  
 //Internal Signals
 reg    [3-1:0] ALU_op_o;
 reg            ALUSrc_o;
 reg            RegWrite_o;
-reg            RegDst_o;
+reg      [1:0] RegDst_o;
 reg    [2-1:0] Branch_o;
 reg            shift_o;
 reg            SE_o;
