@@ -34,7 +34,7 @@ output         RegWrite_o;
 output [3-1:0] ALU_op_o;
 output         ALUSrc_o;
 output   [1:0] RegDst_o;
-output         Branch_o;
+output [2-1:0] Branch_o;
 output         shift_o;
 output         SE_o;
 
