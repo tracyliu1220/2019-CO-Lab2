@@ -22,12 +22,14 @@ wire [32-1:0] PC_4, RDdata_i, se_o, Mux_src, PC_b, se_sa_o, RSdata_o_temp;
 wire [5-1:0] RDaddr;
 wire [4-1:0] ALU_Ctrl;
 wire [3-1:0] ALUop;
-wire RegDst, RegWrite, ALUsrc, branch, enable, zero, shift_o_de, BranchType, B_Ctrl;
+wire RegWrite, ALUsrc, enable, zero, shift_o_de;
+wire [2-1:0] RegDst, branch;
 
 //Internal Signles for Lab3
 wire [27:0] shift_28_o;
 wire [31:0] jump_addr, PC_temp_i, Mem_Mux_o, DM_o;
-wire MemRead, MemWrite, MemtoReg, jump;
+wire MemRead, MemWrite, B_Ctrl;
+wire [2-1:0] jump, MemtoReg, BranchType;
 
 assign jump_addr = {PC_4[31:28], shift_28_o};
 
@@ -50,9 +52,10 @@ Instr_Memory IM(
 	    .instr_o(instr)    
 	    );
 
-MUX_2to1 #(.size(5)) Mux_Write_Reg(
+MUX_3to1 #(.size(5)) Mux_Write_Reg(
         .data0_i(instr[20:16]),
         .data1_i(instr[15:11]),
+        .data2_i(5'b11111),
         .select_i(RegDst),
         .data_o(RDaddr)
         );	
@@ -166,16 +169,18 @@ Data_Memory DM(
         .data_o(DM_o)
         );
 
-MUX_2to1 #(.size(32)) Mux_PC_final(
+MUX_3to1 #(.size(32)) Mux_PC_final(
         .data0_i(jump_addr),
         .data1_i(PC_temp_i),
+        .data2_i(RSdata_o_temp),
         .select_i(jump),
         .data_o(PC_i)
         );
         
-MUX_2to1 #(.size(32)) Memory_MUX(
+MUX_3to1 #(.size(32)) Memory_MUX(
         .data0_i(ALU_result),
         .data1_i(DM_o),
+        .data2_i(PC_4),
         .select_i(MemtoReg),
         .data_o(Mem_Mux_o)
         );
