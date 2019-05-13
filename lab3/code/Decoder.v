@@ -34,7 +34,7 @@ output         RegWrite_o;
 output [3-1:0] ALU_op_o;
 output         ALUSrc_o;
 output   [1:0] RegDst_o;
-output         Branch_o;
+output [2-1:0] Branch_o;
 output         shift_o;
 output         SE_o;
 
@@ -66,6 +66,8 @@ always@(*) begin
     // B
     6'b000100: type <= 1;
     6'b000101: type <= 1;
+    6'b000110: type <= 1;
+    6'b000001: type <= 1;
     // I
     6'b001000: type <= 2;
     6'b001011: type <= 2;
@@ -87,14 +89,31 @@ always@(*) begin
       Branch_o <= 0;
       RegWrite_o <= 1;
       RegDst_o <= 1;
+      // lab3
+      MemtoReg <= 0;
+      MemRead_o <= 0;
+      MemWrite_o <= 0;
+      if (funct == 6'b001000) Jump_o <= 2;
+      else Jump_o <= 1;
     end
     1: begin // Branch
       if (instr_op_i == 6'b000100) ALU_op_o <= 3'b001; // beq
       if (instr_op_i == 6'b000101) ALU_op_o <= 3'b101; // bne
+      if (instr_op_i == 6'b000110) ALU_op_o <= 3'b111; // ble
+      if (instr_op_i == 6'b000101) ALU_op_o <= 3'b100; // bltz
       ALUSrc_o <= 0;
       Branch_o <= 1;
       RegWrite_o <= 0;
       shift_o <= 0;
+      // lab3
+      MemtoReg <= 0;
+      MemRead_o <= 0;
+      MemWrite_o <= 0;
+      if (instr_op_i == 6'b000100) BranchType <= 0; // beq
+      if (instr_op_i == 6'b000101) BranchType <= 1; // bne, bnez
+      if (instr_op_i == 6'b000110) BranchType <= 2; // ble
+      if (instr_op_i == 6'b000101) BranchType <= 3; // bltz
+      Jump_o = 1;
     end
     2: begin // I-format
       ALUSrc_o <= 1;
@@ -106,6 +125,50 @@ always@(*) begin
       if (instr_op_i == 6'b001011) ALU_op_o <= 3'b110; // sltiu
       if (instr_op_i == 6'b001111) ALU_op_o <= 3'b011; // lui
       if (instr_op_i == 6'b001101) ALU_op_o <= 3'b100; // ori
+      // lab3
+      MemtoReg <= 0;
+      MemRead_o <= 0;
+      MemWrite_o <= 0;
+      Jump_o <= 1;
+      SE_o <= 1;
+    end
+    3: begin // lw
+      ALU_op_o <= 3'b000;
+      ALUSrc_o <= 1;
+      Branch_o <= 0;
+      RegWrite_o <= 1;
+      RegDst_o <= 0;
+      shift_o <= 0;
+      // lab3
+      MemtoReg <= 1;
+      MemRead_o <= 1;
+      MemWrite_o <= 0;
+      Jump_o <= 1;
+      SE_o <= 0;
+    end
+    4: begin // sw
+      ALU_op_o <= 3'b000;
+      ALUSrc_o <= 1;
+      Branch_o <= 0;
+      RegWrite_o <= 0;
+      RegDst_o <= 0;
+      shift_o <= 0;
+      // lab3
+      MemtoReg <= 1;
+      MemRead_o <= 0;
+      MemWrite_o <= 1;
+      Jump_o <= 1;
+      SE_o <= 0;
+    end
+    5: begin
+      Jump_o <= 0;
+      MemRead_o <= 0;
+      MemWrite_o <= 0;
+      if (funct == 6'b000010) MemtoReg <= 0;
+      if (funct == 6'b000011) begin
+        MemtoReg <= 2;
+        RegDst_o <= 2;
+      end
     end
   endcase
   case (instr_op_i)
