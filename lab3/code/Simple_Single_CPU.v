@@ -143,7 +143,7 @@ Shift_Left_Two_32 Shifter(
 MUX_2to1 #(.size(32)) Mux_PC_Source(
         .data0_i(PC_4),
         .data1_i(PC_b),
-        .select_i(branch & B_Ctrl),
+        .select_i(branch && B_Ctrl),
         .data_o(PC_temp_i)
         );	
         
