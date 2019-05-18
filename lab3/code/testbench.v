@@ -37,7 +37,7 @@ module TestBench;
     #(`CYCLE_TIME)
     
     Start = 1;
-    #(`CYCLE_TIME*20)	
+    #(`CYCLE_TIME*560)	
     
   $finish;
   end
@@ -45,9 +45,20 @@ module TestBench;
   always@(posedge Clk) begin
     $display("---------------------------------------------------------------------------------");
   	$display("PC = %d", CPU.PC.pc_out_o);
-    $display("src1 = %d", CPU.ALU.src1_i);
-    $display("src2 = %d", CPU.ALU.src2_i);
-    $display("ALU = %d", CPU.ALU.result_o);
+    $display("op = %d", CPU.Decoder.instr_op_i);
+    // $display("btrl.zero = %d", CPU.BC.zero_i);
+    // $display("btrl.result = %d", CPU.BC.result_i);
+    // $display("btrl.type = %d", CPU.BC.BranchType);
+    // $display("btrl.ctrl = %d", CPU.BC.control_o);
+    // $display("src1 = %d", CPU.ALU.src1_i);
+    // $display("src2 = %d", CPU.ALU.src2_i);
+    // $display("ALU = %d", CPU.ALU.result_o);
+    // $display("address select = %d", CPU.Mux_Write_Reg.select_i);
+    // $display("regdst = %d", CPU.Decoder.RegDst_o);
+    // $display("memtoreg = %d", CPU.Decoder.MemtoReg);
+    // $display("regwrite = %d", CPU.Decoder.RegWrite_o);
+    // $display("Rd address = %d", CPU.RF.RDaddr_i);
+    // $display("MemtoReg data = %d", CPU.Memory_MUX.data_o);
     $display("Data Memory = %d, %d, %d, %d, %d, %d, %d, %d",CPU.DM.memory[0], CPU.DM.memory[1], CPU.DM.memory[2], CPU.DM.memory[3], CPU.DM.memory[4], CPU.DM.memory[5], CPU.DM.memory[6], CPU.DM.memory[7]);
     $display("Data Memory = %d, %d, %d, %d, %d, %d, %d, %d",CPU.DM.memory[8], CPU.DM.memory[9], CPU.DM.memory[10], CPU.DM.memory[11], CPU.DM.memory[12], CPU.DM.memory[13], CPU.DM.memory[14], CPU.DM.memory[15]);
     $display("Data Memory = %d, %d, %d, %d, %d, %d, %d, %d",CPU.DM.memory[16], CPU.DM.memory[17], CPU.DM.memory[18], CPU.DM.memory[19], CPU.DM.memory[20], CPU.DM.memory[21], CPU.DM.memory[22], CPU.DM.memory[23]);

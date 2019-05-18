@@ -98,7 +98,10 @@ always@(*) begin
       MemtoReg <= 0;
       MemRead_o <= 0;
       MemWrite_o <= 0;
-      if (funct == 6'b001000) Jump_o <= 2;
+      if (funct == 6'b001000) begin 
+        Jump_o <= 2;
+        RegWrite_o <= 0;
+      end
       else Jump_o <= 1;
     end
     1: begin // Branch
@@ -170,8 +173,10 @@ always@(*) begin
       MemRead_o <= 0;
       MemWrite_o <= 0;
       RegWrite_o <= 0;
-      if (funct == 6'b000010) MemtoReg <= 0;
-      if (funct == 6'b000011) begin
+      // RegDst_o <= 2;
+      if (instr_op_i == 6'b000010) MemtoReg <= 0;
+      if (instr_op_i == 6'b000011) begin
+        RegWrite_o <= 1;
         MemtoReg <= 2;
         RegDst_o <= 2;
       end

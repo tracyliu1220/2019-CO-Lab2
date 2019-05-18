@@ -46,6 +46,7 @@ always@(ctrl_i, src1_i, src2_i) begin
         default: result_o <= 0;
     endcase
 end
+assign zero_o = (result_o == 0)? 1:0;
 
 endmodule
 
