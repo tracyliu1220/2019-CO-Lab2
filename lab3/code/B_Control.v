@@ -23,8 +23,8 @@ input   [1:0] BranchType;
 output        control_o;  
 
 //Internal Signals
-reg    signed result_i;
-wire          control_o;
+wire  signed [31:0] result_i;
+reg          control_o;
 
 //Main function
 always@(*) begin

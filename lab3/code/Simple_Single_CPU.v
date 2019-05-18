@@ -48,7 +48,7 @@ Adder Adder1(
 	    );
 	
 Instr_Memory IM(
-        .pc_addr_i(PC_o),  
+        .addr_i(PC_o),  
 	    .instr_o(instr)    
 	    );
 

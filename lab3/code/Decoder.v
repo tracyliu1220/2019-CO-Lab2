@@ -54,6 +54,11 @@ reg    [2-1:0] Branch_o;
 reg            shift_o;
 reg            SE_o;
 reg    [3-1:0] type;
+reg	       MemRead_o;
+reg     	   MemWrite_o;
+reg   [1:0] MemtoReg;
+reg   [1:0] Jump_o;
+reg 	 [1:0] BranchType;
 
 //Parameter
 
