@@ -169,6 +169,7 @@ always@(*) begin
       Jump_o <= 0;
       MemRead_o <= 0;
       MemWrite_o <= 0;
+      RegWrite_o <= 0;
       if (funct == 6'b000010) MemtoReg <= 0;
       if (funct == 6'b000011) begin
         MemtoReg <= 2;
