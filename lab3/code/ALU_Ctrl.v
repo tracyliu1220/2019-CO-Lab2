@@ -47,6 +47,7 @@ always@(funct_i, ALUOp_i) begin
   	3'b100: ALUCtrl_o <= 4'b0001; // ori
     3'b101: ALUCtrl_o <= 4'b1010; // bne
     3'b110: ALUCtrl_o <= 4'b0111; // sltiu
+    3'b111: ALUCtrl_o <= 4'b1011; // ble
   endcase
 end
 
