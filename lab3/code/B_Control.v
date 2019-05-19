@@ -30,7 +30,7 @@ reg          control_o;
 always@(*) begin
   case (BranchType)
     0: control_o = zero_i;   // beq
-    1: control_o = ~zero_i;  // bne, bnez
+    1: control_o = !zero_i;  // bne, bnez
     2: control_o = result_i; // ble
     3: control_o = (result_i < 0); // bltz
   endcase

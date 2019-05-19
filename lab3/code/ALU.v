@@ -41,8 +41,8 @@ always@(ctrl_i, src1_i, src2_i) begin
         7:  result_o <= $signed(src1_i) < $signed(src2_i) ? 1 : 0;
         8:  result_o <= $signed(src2_i) >>> src1_i;  // shift right
         9:  result_o <= src2_i << 16;       // lui
-        11: result_o <= ~($signed(src1_i) > $signed(src2_i)); // ble
-        12: result_o <= ~(src1_i | src2_i); // nor
+        11: result_o <= !($signed(src1_i) > $signed(src2_i)); // ble
+        12: result_o <= !(src1_i | src2_i); // nor
         13: result_o <= $signed(src1_i) * $signed(src2_i);
         default: result_o <= 0;
     endcase

@@ -108,7 +108,7 @@ always@(*) begin
       if (instr_op_i == 6'b000100) ALU_op_o <= 3'b001; // beq
       if (instr_op_i == 6'b000101) ALU_op_o <= 3'b101; // bne
       if (instr_op_i == 6'b000110) ALU_op_o <= 3'b111; // ble
-      if (instr_op_i == 6'b000101) ALU_op_o <= 3'b100; // bltz
+      if (instr_op_i == 6'b000101) ALU_op_o <= 3'b000; // bltz
       ALUSrc_o <= 0;
       Branch_o <= 1;
       RegWrite_o <= 0;
@@ -120,7 +120,7 @@ always@(*) begin
       if (instr_op_i == 6'b000100) BranchType <= 0; // beq
       if (instr_op_i == 6'b000101) BranchType <= 1; // bne, bnez
       if (instr_op_i == 6'b000110) BranchType <= 2; // ble
-      if (instr_op_i == 6'b000101) BranchType <= 3; // bltz
+      if (instr_op_i == 6'b000001) BranchType <= 3; // bltz
       Jump_o = 1;
     end
     2: begin // I-format
@@ -131,7 +131,7 @@ always@(*) begin
       shift_o <= 0;
       if (instr_op_i == 6'b001000) ALU_op_o <= 3'b000; // addi
       if (instr_op_i == 6'b001011) ALU_op_o <= 3'b110; // sltiu
-      if (instr_op_i == 6'b001111) ALU_op_o <= 3'b000; // lui
+      if (instr_op_i == 6'b001111) ALU_op_o <= 3'b000; // li
       if (instr_op_i == 6'b001101) ALU_op_o <= 3'b100; // ori
       // lab3
       MemtoReg <= 0;
