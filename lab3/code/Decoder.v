@@ -131,7 +131,7 @@ always@(*) begin
       shift_o <= 0;
       if (instr_op_i == 6'b001000) ALU_op_o <= 3'b000; // addi
       if (instr_op_i == 6'b001011) ALU_op_o <= 3'b110; // sltiu
-      if (instr_op_i == 6'b001111) ALU_op_o <= 3'b011; // lui
+      if (instr_op_i == 6'b001111) ALU_op_o <= 3'b000; // lui
       if (instr_op_i == 6'b001101) ALU_op_o <= 3'b100; // ori
       // lab3
       MemtoReg <= 0;

@@ -41,6 +41,7 @@ always@(funct_i, ALUOp_i) begin
         6'b101010: ALUCtrl_o <= 4'b0111; // slt
         6'b000011: ALUCtrl_o <= 4'b1000; // sra
         6'b000111: ALUCtrl_o <= 4'b1000; // srav
+        6'b011000: ALUCtrl_o <= 4'b1101; // mul
   	  endcase
   	end
   	3'b011: ALUCtrl_o <= 4'b1001; // lui
