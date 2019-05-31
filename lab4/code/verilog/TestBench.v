@@ -5,9 +5,9 @@ module TestBench;
 	reg	CLK, START;
 	integer	handle1, handle2;
 
-	CPU	cpu(
+	Simple_Single_CPU	cpu(
 				.clk_i(CLK),
-				.start_i(START)
+				.rst_i(START)
 				);
 
 initial	begin
