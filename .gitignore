@@ -1,5 +1,6 @@
 lab2/*
 lab2/code/*
 lab3/code/*
-!lab3/code/*.v
-!lab3/code/*.txt
+lab4/code/*
+!lab4/code/cpp/*.cpp
+!lab4/code/verilog/*.v
