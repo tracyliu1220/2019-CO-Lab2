@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <math.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -31,7 +32,7 @@ double log2(double n)
 }
 
 
-double simulate(int cache_size, int block_size, int way_n)
+double simulate(int cache_size, int block_size, int way_n, int data)
 {
 	unsigned int tag, index, x;
     int cnt_miss = 0, cnt_hit = 0;
@@ -42,15 +43,16 @@ double simulate(int cache_size, int block_size, int way_n)
 
 	cache_content *cache = new cache_content[line]; // declaration of blocks
 	
-    // cout << "cache line: " << line << endl;
-
 	for(int j = 0; j < line; j++) {
         for (int k = 0; k < way_n; k ++)
 		    cache[j].v[k] = false;
         cache[j].cnt = 0;
     }
 	
-    FILE *fp = fopen("../../verilog/ICACHE.txt", "r");  // read file
+    // read file
+    FILE *fp;
+    if (data == 0) fp = fopen("test/LU.txt", "r");
+    if (data == 1) fp = fopen("test/RADIX.txt", "r");
 
     int time = 0;
 	
@@ -94,14 +96,6 @@ double simulate(int cache_size, int block_size, int way_n)
         time ++;
 	}
 	fclose(fp);
-    
-    /*
-    cout << "\n-----\n";
-    cout << "hit:       " << dec << cnt_hit << '\n';
-    cout << "miss:      " << dec << cnt_miss << '\n';
-    cout << "miss_rate: " << cnt_miss / (double)(cnt_hit + cnt_miss) << '\n';
-    cout << "-----\n";
-    */
 
 	delete [] cache;
     
@@ -109,20 +103,24 @@ double simulate(int cache_size, int block_size, int way_n)
     return miss_rate;
 }
 	
-int main()
-{
-	// Let us simulate 4KB cache with 16B blocks
-    // simulate(cache_sz * K, block_sz, way_n);
-
-    for (int i = 0; i < 6; i ++) {
-        cout << csz[i] << ": \t";
-        for (int j = 0; j < 4; j ++) {
-            cache_sz = csz[i]; // K
-            block_sz = 64;
-            way_n = way[j];
-            double ret = simulate(cache_sz * K, block_sz, way_n);
-            cout << ret << '\t';
+int main() {
+    cout << "\n=== direct_mapped_cache_lru.cpp ===\n";
+    for (int k = 0; k < 2; k ++) {
+        if (k == 0) cout << "\ntest/LU.txt\n\n";
+        if (k == 1) cout << "\ntest/RADIX.txt\n\n";
+        cout << "         1-way    2-way    4-way    8-way\n";
+        cout << "-----------------------------------------\n";
+        for (int i = 0; i < 6; i ++) {
+            cout << setw(2) << csz[i] << "K: ";
+            for (int j = 0; j < 4; j ++) {
+                cache_sz = csz[i]; // K
+                block_sz = 64;
+                way_n = way[j];
+                double ret = simulate(cache_sz * K, block_sz, way_n, k);
+                cout << setw(9) << setprecision(3) << fixed << ret * 100;
+            }
+            cout << '\n';
         }
-        cout << '\n';
     }
+    cout << "\n\n";
 }

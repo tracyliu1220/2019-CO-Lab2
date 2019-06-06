@@ -13,8 +13,8 @@ module TestBench;
 initial	begin
 		CLK	=	0;
 		START	=	0;
-		handle1	=	$fopen("ICACHE.txt");
-		handle2	=	$fopen("DCACHE.txt");
+		handle1	=	$fopen("test/ICACHE.txt");
+		handle2	=	$fopen("test/DCACHE.txt");
 
 		#(`CYCLE_TIME)
 
@@ -22,7 +22,8 @@ initial	begin
 		#(`CYCLE_TIME*1000)	begin
 		$fclose(handle1);
 		$fclose(handle2);
-		$stop;
+		// $stop;
+        $finish;
 		end
 end
 
