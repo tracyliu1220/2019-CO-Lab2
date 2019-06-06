@@ -14,7 +14,7 @@ OUTFILE=test/out.txt
 display: map lru
 	./${CMAP}.out
 	./${CLRU}.out
-	./${CMAP}.out >> ${OUTFILE}
+	./${CMAP}.out > ${OUTFILE}
 	./${CLRU}.out >> ${OUTFILE}
 
 map: trace
@@ -28,4 +28,4 @@ trace:
 	vvp ${VOUT}
 
 clean:
-	rm ${VOUT} ${CMAP}.out ${CLRU}.out ${TXTOUT}
+	rm ${VOUT} ${CMAP}.out ${CLRU}.out ${TXTOUT} ${OUTFILE}
