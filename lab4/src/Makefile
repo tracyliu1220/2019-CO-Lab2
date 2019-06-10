@@ -32,4 +32,4 @@ trace:
 	vvp ${VOUT}
 
 clean:
-	rm ${VOUT} ${CMAP}.out ${CLRU}.out ${TXTOUT} ${OUTFILE}
+	rm ${VOUT} ${CMAP}.out ${CLRU}.out ${CTAG}.out ${TXTOUT} ${OUTFILE}

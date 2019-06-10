@@ -71,7 +71,7 @@ int main() {
                 block_sz = 64;
                 way_n = way[j];
                 int ret = tag_cnt(cache_sz * K, block_sz, way_n, k);
-                cout << setw(9) << ret;
+                cout << setw(9) << ret + 1; // add 1-bit valid
             }
             cout << '\n';
         }
