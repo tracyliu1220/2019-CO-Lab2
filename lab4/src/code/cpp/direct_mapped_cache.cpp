@@ -17,7 +17,7 @@ struct cache_content {
 
 const int K = 1024;
 
-double log2(double n) {  
+double log2(double n) {
     // log(n) / log(2) is log2.
     return log(n) / log(double(2));
 }
@@ -35,12 +35,12 @@ double simulate(int cache_size, int block_size, int data) {
 
     for(int j = 0; j < line; j++)
         cache[j].v = false;
-    
+
     // read file
     FILE *fp;
     if (data == 0) fp = fopen("test/ICACHE.txt", "r");
     if (data == 1) fp = fopen("test/DCACHE.txt", "r");
-    
+
     while(fscanf(fp, "%x", &x) != EOF) {
         index = (x >> offset_bit) & (line - 1);
         tag = x >> (index_bit + offset_bit);
@@ -55,14 +55,14 @@ double simulate(int cache_size, int block_size, int data) {
         }
     }
     fclose(fp);
-    
+
     double miss_rate = cnt_miss / (double)(cnt_hit + cnt_miss);
 
     delete [] cache;
 
     return miss_rate;
 }
-    
+
 int main() {
 
     cout << "\n=== direct_mapped_cache.cpp ===\n";
@@ -80,7 +80,7 @@ int main() {
                 cout << setw(9) << setprecision(3) << fixed << ret * 100;
             }
             cout << '\n';
-        } 
+        }
     }
     cout << "\n\n";
 }

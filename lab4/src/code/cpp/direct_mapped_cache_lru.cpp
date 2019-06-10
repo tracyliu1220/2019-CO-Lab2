@@ -24,7 +24,7 @@ struct cache_content {
 
 const int K = 1024;
 
-double log2(double n) { 
+double log2(double n) {
     // log(n) / log(2) is log2.
     return log(n) / log(double(2));
 }
@@ -39,20 +39,20 @@ double simulate(int cache_size, int block_size, int way_n, int data) {
     int line = cache_size / block_size / way_n; // # of cache contents
 
     cache_content *cache = new cache_content[line]; // declaration of blocks
- 
+
     for(int j = 0; j < line; j++) {
         for (int k = 0; k < way_n; k ++)
             cache[j].v[k] = false;
         cache[j].cnt = 0;
     }
-    
+
     // read file
     FILE *fp;
     if (data == 0) fp = fopen("test/LU.txt", "r");
     if (data == 1) fp = fopen("test/RADIX.txt", "r");
 
     int time = 0;
-    
+
     while(fscanf(fp, "%x", &x) != EOF) {
 
         index = (x >> offset_bit) & (line - 1);
@@ -95,11 +95,11 @@ double simulate(int cache_size, int block_size, int way_n, int data) {
     fclose(fp);
 
     delete [] cache;
-    
+
     double miss_rate = cnt_miss / (double)(cnt_hit + cnt_miss);
     return miss_rate;
 }
-    
+
 int main() {
     cout << "\n=== direct_mapped_cache_lru.cpp ===\n";
     for (int k = 0; k < 2; k ++) {
