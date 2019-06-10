@@ -38,23 +38,7 @@ int tag_cnt(int cache_size, int block_size, int way_n, int data) {
     int index_bit = (int)log2(cache_size / block_size / way_n); // log2(# of cache contents)
     int line = cache_size / block_size / way_n; // # of cache contents
 
-    // read file
-    FILE *fp;
-    if (data == 0) fp = fopen("test/LU.txt", "r");
-    if (data == 1) fp = fopen("test/RADIX.txt", "r");
-
-    int tag_max = 0;
-
-    while(fscanf(fp, "%x", &x) != EOF) {
-
-        index = (x >> offset_bit) & (line - 1);
-        tag = x >> (index_bit + offset_bit);
-        tag_max = max(tag_max, tag);
-    }
-    fclose(fp);
-
-    tag_max = (int)log2(tag_max);
-    return tag_max;
+    return (1 + (32 - index_bit - offset_bit) + block_sz * 8) * (line * way_n);
 }
 
 int main() {
@@ -71,7 +55,7 @@ int main() {
                 block_sz = 64;
                 way_n = way[j];
                 int ret = tag_cnt(cache_sz * K, block_sz, way_n, k);
-                cout << setw(9) << ret + 1 + block_sz * 8; // total bits
+                cout << setw(9) << ret; // total bits
             }
             cout << '\n';
         }
