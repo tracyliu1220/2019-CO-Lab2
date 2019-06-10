@@ -58,7 +58,7 @@ int tag_cnt(int cache_size, int block_size, int way_n, int data) {
 }
 
 int main() {
-    cout << "\n=== direct_mapped_cache_lru_tag.cpp ===\n";
+    cout << "\n=== direct_mapped_cache_lru_totalbits.cpp ===\n";
     for (int k = 0; k < 2; k ++) {
         if (k == 0) cout << "\ntest/LU.txt\n\n";
         if (k == 1) cout << "\ntest/RADIX.txt\n\n";
@@ -71,7 +71,7 @@ int main() {
                 block_sz = 64;
                 way_n = way[j];
                 int ret = tag_cnt(cache_sz * K, block_sz, way_n, k);
-                cout << setw(9) << ret + 1; // add 1-bit valid
+                cout << setw(9) << ret + 1 + block_sz * 8; // total bits
             }
             cout << '\n';
         }

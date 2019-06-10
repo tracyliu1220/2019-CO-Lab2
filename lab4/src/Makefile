@@ -6,30 +6,28 @@ TXTOUT=test/ICACHE.txt test/DCACHE.txt
 CC=g++ -O2
 CMAP=code/cpp/direct_mapped_cache
 CLRU=code/cpp/direct_mapped_cache_lru
-CTAG=code/cpp/direct_mapped_cache_lru_tag
+CBIT=code/cpp/direct_mapped_cache_lru_totalbits
 
 OUTFILE=test/out.txt
 
 .PHONY: clean
 
 display: map lru
-	./${CMAP}.out
-	./${CLRU}.out
-	./${CTAG}.out
 	./${CMAP}.out > ${OUTFILE}
 	./${CLRU}.out >> ${OUTFILE}
-	./${CTAG}.out >> ${OUTFILE}
+	./${CBIT}.out >> ${OUTFILE}
+	cat ${OUTFILE}
 
 map: trace
 	${CC} -o ${CMAP}.out ${CMAP}.cpp
 
 lru:
 	${CC} -o ${CLRU}.out ${CLRU}.cpp
-	${CC} -o ${CTAG}.out ${CTAG}.cpp
+	${CC} -o ${CBIT}.out ${CBIT}.cpp
 
 trace:
 	${V} -o ${VOUT} ${VTARGET}
 	vvp ${VOUT}
 
 clean:
-	rm ${VOUT} ${CMAP}.out ${CLRU}.out ${CTAG}.out ${TXTOUT} ${OUTFILE}
+	rm ${VOUT} ${CMAP}.out ${CLRU}.out ${CBIT}.out ${TXTOUT} ${OUTFILE}
