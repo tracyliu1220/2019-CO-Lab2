@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <stdio.h>
 #include <math.h>
 #include <iomanip>
@@ -6,7 +7,7 @@
 
 using namespace std;
 
-long long addrA, addrB, addrC;
+unsigned long long addrA, addrB, addrC;
 int m, n, p;
 
 vector<vector<int> > mA;
@@ -114,17 +115,19 @@ int simulate(int cache_size, int block_size, int way_n,
     return cnt_miss;
 }
 
-int main() {
+int main(int argc, char** argv) {
 
-    cin >> hex >> addrA >> addrB >> addrC;
-    cin >> dec >> m >> n >> p;
+    ifstream fin(argv[1]);
+    ofstream fout(argv[2]);
+    fin >> hex >> addrA >> addrB >> addrC;
+    fin >> dec >> m >> n >> p;
     mA.resize(m); mB.resize(n); mC.resize(m);
 
     // matrix A values
     for (int i = 0; i < m; i ++) {
         for (int j = 0; j < n; j ++) {
             int tmp;
-            cin >> dec >> tmp;
+            fin >> dec >> tmp;
             mA[i].push_back(tmp);
         }
     }
@@ -133,7 +136,7 @@ int main() {
     for (int i = 0; i < n; i ++) {
         for (int j = 0; j < p; j ++) {
             int tmp;
-            cin >> dec >> tmp;
+            fin >> dec >> tmp;
             mB[i].push_back(tmp);
         }
     }
@@ -152,14 +155,10 @@ int main() {
                 address.push_back(C(i, j));
                 mC[i][j] += mA[i][k] * mB[k][j];
             }
+            fout << mC[i][j] << ' ';
         }
+        fout << '\n';
     }
-
-    /*
-    for (int i = 0; i < address.size(); i ++) {
-        cout << address[i] << '\n';
-    }
-    */
 
     bandwidth = 1;
     block_sz_words = 8;
@@ -167,7 +166,7 @@ int main() {
     block_sz = block_sz_words * 4;
     way_n = 8;
 
-    cout << execution_cycles() << '\n';
+    fout << execution_cycles() << ' ';
 
     int cnt_miss, cnt_hit;
     cnt_miss = simulate(cache_sz, block_sz, way_n, address, L1_miss_address);
@@ -175,23 +174,23 @@ int main() {
     L1_miss_address.clear();
 
     // 1(a)
-    cout << cnt_miss * 836 + cnt_hit * 4 << '\n';
+    fout << cnt_miss * 836 + cnt_hit * 4 << ' ';
     // 1(b)
-    cout << cnt_miss * 108 + cnt_hit * 4 << '\n';
+    fout << cnt_miss * 108 + cnt_hit * 4 << ' ';
 
     int cnt_L1_miss, cnt_L2_miss;
     cache_sz = 128;
-    block_sz = 4;
+    block_sz = 16;
     simulate(cache_sz, block_sz, way_n, address, L1_miss_address);
     cache_sz = 4096;
-    block_sz = 32;
+    block_sz = 128;
     simulate(cache_sz, block_sz, way_n, L1_miss_address, L2_miss_address);
     cnt_L2_miss = L2_miss_address.size();
     cnt_L1_miss = L1_miss_address.size() - cnt_L2_miss;
-    cnt_hit     = address.size() - cnt_L1_miss;
-    cout << "hit:    " << cnt_hit << '\n';
-    cout << "miss:   " << cnt_L1_miss << '\n';
-    cout << "global: " << cnt_L2_miss << '\n';
-    cout << "total:  " << address.size() << '\n';
-    cout << cnt_hit * 3 + cnt_L1_miss * 55 + cnt_L2_miss * 3639 << '\n';
+    cnt_hit     = address.size() - L1_miss_address.size();
+    // fout << "hit:    " << cnt_hit << '\n';
+    // fout << "miss:   " << cnt_L1_miss << '\n';
+    // fout << "global: " << cnt_L2_miss << '\n';
+    // fout << "total:  " << address.size() << '\n';
+    fout << cnt_hit * 3 + cnt_L1_miss * 55 + cnt_L2_miss * 3639 << '\n';
 }
