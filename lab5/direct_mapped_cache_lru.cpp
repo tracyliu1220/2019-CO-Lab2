@@ -17,6 +17,8 @@ int A(int i, int j) {return addrA + i * n * 4 + j * 4;}
 int B(int i, int j) {return addrB + i * p * 4 + j * 4;}
 int C(int i, int j) {return addrC + i * p * 4 + j * 4;}
 vector<int> address;
+vector<int> L1_miss_address;
+vector<int> L2_miss_address;
 
 int execution_cycles() {
     return 2 + (22 * m * p * n + 2 * m * p) + (5 * m * p + 2 * m) + (5 * m + 2) + 1;
@@ -44,7 +46,8 @@ double log2(double n) {
 }
 
 
-int simulate(int cache_size, int block_size, int way_n) {
+int simulate(int cache_size, int block_size, int way_n,
+        vector<int> & addr, vector<int> & miss_addr) {
     unsigned int tag, index, x;
     int cnt_miss = 0, cnt_hit = 0;
 
@@ -62,8 +65,8 @@ int simulate(int cache_size, int block_size, int way_n) {
 
     int time = 0;
 
-    for (int i = 0; i < address.size(); i ++) {
-        x = address[i];
+    for (int i = 0; i < addr.size(); i ++) {
+        x = addr[i];
 
         index = (x >> offset_bit) & (line - 1);
         tag = x >> (index_bit + offset_bit);
@@ -98,6 +101,7 @@ int simulate(int cache_size, int block_size, int way_n) {
                 cache[index].last[minid] = time;
             }
             cnt_miss ++;
+            miss_addr.push_back(x);
         }
 
         time ++;
@@ -115,7 +119,7 @@ int main() {
     cin >> hex >> addrA >> addrB >> addrC;
     cin >> dec >> m >> n >> p;
     mA.resize(m); mB.resize(n); mC.resize(m);
-    
+
     // matrix A values
     for (int i = 0; i < m; i ++) {
         for (int j = 0; j < n; j ++) {
@@ -151,17 +155,43 @@ int main() {
         }
     }
 
-    // for (int i = 0; i < address.size(); i ++) {
-    //     cout << address[i] << '\n';
-    // }
-              
+    /*
+    for (int i = 0; i < address.size(); i ++) {
+        cout << address[i] << '\n';
+    }
+    */
+
     bandwidth = 1;
-    block_sz_words = 8;  
+    block_sz_words = 8;
     cache_sz = 512;
     block_sz = block_sz_words * 4;
     way_n = 8;
-    int count = simulate(cache_sz, block_sz, way_n);
-    cout << count << '\n';
+
     cout << execution_cycles() << '\n';
-    cout << count * 836 + (address.size() - count) * 4 << '\n';
+
+    int cnt_miss, cnt_hit;
+    cnt_miss = simulate(cache_sz, block_sz, way_n, address, L1_miss_address);
+    cnt_hit  = address.size() - cnt_miss;
+    L1_miss_address.clear();
+
+    // 1(a)
+    cout << cnt_miss * 836 + cnt_hit * 4 << '\n';
+    // 1(b)
+    cout << cnt_miss * 108 + cnt_hit * 4 << '\n';
+
+    int cnt_L1_miss, cnt_L2_miss;
+    cache_sz = 128;
+    block_sz = 4;
+    simulate(cache_sz, block_sz, way_n, address, L1_miss_address);
+    cache_sz = 4096;
+    block_sz = 32;
+    simulate(cache_sz, block_sz, way_n, L1_miss_address, L2_miss_address);
+    cnt_L2_miss = L2_miss_address.size();
+    cnt_L1_miss = L1_miss_address.size() - cnt_L2_miss;
+    cnt_hit     = address.size() - cnt_L1_miss;
+    cout << "hit:    " << cnt_hit << '\n';
+    cout << "miss:   " << cnt_L1_miss << '\n';
+    cout << "global: " << cnt_L2_miss << '\n';
+    cout << "total:  " << address.size() << '\n';
+    cout << cnt_hit * 3 + cnt_L1_miss * 55 + cnt_L2_miss * 3639 << '\n';
 }
