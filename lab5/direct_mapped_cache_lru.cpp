@@ -162,4 +162,6 @@ int main() {
     way_n = 8;
     int count = simulate(cache_sz, block_sz, way_n);
     cout << count << '\n';
+    cout << execution_cycles() << '\n';
+    cout << count * 836 + (address.size() - count) * 4 << '\n';
 }
