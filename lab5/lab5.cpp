@@ -21,7 +21,7 @@ vector<int> address;
 vector<int> L1_miss_address;
 vector<int> L2_miss_address;
 
-int execution_cycles() {
+long long execution_cycles() {
     return 2 + (22 * m * p * n + 2 * m * p) + (5 * m * p + 2 * m) + (5 * m + 2) + 1;
 }
 
@@ -174,9 +174,9 @@ int main(int argc, char** argv) {
     L1_miss_address.clear();
 
     // 1(a)
-    fout << cnt_miss * 836 + cnt_hit * 4 << ' ';
+    fout << cnt_miss * 836LL + cnt_hit * 4LL << ' ';
     // 1(b)
-    fout << cnt_miss * 108 + cnt_hit * 4 << ' ';
+    fout << cnt_miss * 108LL + cnt_hit * 4LL << ' ';
 
     int cnt_L1_miss, cnt_L2_miss;
     cache_sz = 128;
@@ -188,9 +188,6 @@ int main(int argc, char** argv) {
     cnt_L2_miss = L2_miss_address.size();
     cnt_L1_miss = L1_miss_address.size() - cnt_L2_miss;
     cnt_hit     = address.size() - L1_miss_address.size();
-    // fout << "hit:    " << cnt_hit << '\n';
-    // fout << "miss:   " << cnt_L1_miss << '\n';
-    // fout << "global: " << cnt_L2_miss << '\n';
-    // fout << "total:  " << address.size() << '\n';
-    fout << cnt_hit * 3 + cnt_L1_miss * 55 + cnt_L2_miss * 3639 << '\n';
+    // 1(c)
+    fout << cnt_hit * 3LL + cnt_L1_miss * 55LL + cnt_L2_miss * 3639LL << '\n';
 }

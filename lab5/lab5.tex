@@ -1,0 +1,109 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{multicol}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{CJKutf8}
+\usepackage{amsmath}
+\usepackage{listings}
+
+\title{
+    \textbf{2019 Spring NCTU Computer Organization} \\
+    \large Lab5 Report \\
+    \small Tracy Liu
+    \author Tracy Liu
+    \date{}
+}
+
+\geometry{a4paper,left=2cm,right=2cm,top=2.8cm,bottom=3.2cm}
+\setlength{\columnsep}{1cm}
+\setlength{\baselineskip}{100pt}
+\linespread{1.2}
+
+\begin{document}
+    \begin{CJK*}{UTF8}{bsmi}
+    \begin{center}
+        \LARGE\textbf{2019 Spring NCTU Computer Organization} \\
+        \large Lab5 Report \\
+        \small 0616015 劉姿利、0616092 粘捷 \\
+    \end{center}
+    \section{Memory Stall Cycles Calculations}
+        \begin{center}
+            \begin{tabular}{ccr}
+            \hline
+                Notions & Operations & Delay (cycle) \\
+            \hline
+                $t_{sa}$ & Send the address & 1 \\
+                $t_{al}$ & Access single cache content & 2 \\
+                $t_{al1}$ & Access L1 cache content & 1 \\
+                $t_{al2}$ & Access L2 cache content & 10 \\
+                $t_{am}$ & Access memory content & 100 \\
+                $t_{sw}$ & Send a word of data & 1 \\
+            \hline
+            \end{tabular}
+        \end{center}
+        \subsection{One-word-wide memory organization}
+            $
+            \begin{aligned} 
+            hit\_cycles  & = t_{sa} + t_{al} + t_{sw} \\ 
+                         & = 1 + 2 + 1 = 4 \\
+            miss\_cycles & = t_{sa} + 8 \times (t_{sa} + t_{am} + t_{sw} + t_{al}) + t_{al} + t_{sw} \\
+                         & = 1 + 8 \times (1 + 100 + 1 + 2) + 2 + 1 = 836 \\
+            \end{aligned}  
+            $
+        \subsection{Wider memory organization}
+            $
+            \begin{aligned} 
+            hit\_cycles & = t_{sa} + t_{al} + t_{sw} \\ 
+                       & = 1 + 2 + 1 = 4 \\
+            miss\_cycles & = t_{sa} + (t_{sa} + t_{am} + t_{sw} + t_{al}) + t_{al} + t_{sw} \\
+                        & = 1 + (1 + 100 + 1 + 2) + 2 + 1 = 108 \\
+            \end{aligned} 
+            $
+        \subsection{Two-level memory organization}
+            $
+            \begin{aligned} 
+            hit\_cycles         & = t_{sa} + t_{al1} + t_{sw} \\ 
+                               & = 1 + 1 + 1 = 3 \\
+            L1\_miss\_cycles     & = t_{sa} + (t_{sa} + t_{al2} + t_{sw} + t_{al1}) + t_{al1} + t_{sw} \\
+                               & = 1 + 4 \times (1 + 10 + 1 + 1) + 1 + 1 = 55 \\
+            global\_miss\_cycles & = t_{sa} + 32 \times (t_{sa} + t_{am} + t_{sw} + t_{al2}) + 4 \times (t_{sa} + t_{al2} + t_{sw} + t_{al1}) + t_{al1} + t_{sw} \\
+                               & = 1 + 32 \times (1 + 100 + 1 + 10) + 4 \times (1 + 10 + 1 + 1) + 1 + 1 = 3639 \\
+            \end{aligned} 
+            $
+    \newpage
+    \section{Differences among Memory Organizations}
+
+    \section{Bonus}
+        \subsection{matmul.txt} 
+        \begin{lstlisting}[language=C++]
+        for (i = 0; i < m; i ++) {
+            for (j = 0; j < p; j ++) {
+                for (k = 0; k < n; k ++) {
+                    load C[i][j];
+                    load A[i][k];
+                    load B[k][j];
+                    do C[i][j] += A[i][k] * B[k][j];
+                    store C[i][j];
+                }
+            }
+        }
+        \end{lstlisting}
+
+        \subsection{bonus.txt} 
+        \begin{lstlisting}[language=C++]
+        for (i = 0; i < m; i ++) {
+            for (j = 0; j < n; j ++) {
+                load A[i][j];
+                for (k = 0; k < p; k ++) {
+                    load C[i][k];
+                    load B[j][k];
+                    do C[i][k] += A[i][j] * B[j][k];
+                    store C[i][k];
+                }
+            }
+        }
+        \end{lstlisting}
+
+    \end{CJK*}
+\end{document}
