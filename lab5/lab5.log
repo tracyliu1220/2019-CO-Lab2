@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.6.26)  26 JUN 2019 17:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.6.26)  26 JUN 2019 22:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -727,6 +727,14 @@ $[][]$
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 79.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 79.
+
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
@@ -736,60 +744,59 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 83.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 85.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 83.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 83.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 83.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 85.
  [2]
-Underfull \hbox (badness 10000) in paragraph at lines 115--118
+Underfull \hbox (badness 10000) in paragraph at lines 117--120
 
  []
 
 [3] (./lab5.aux) ) 
 Here is how much of TeX's memory you used:
- 5206 strings out of 492982
- 64202 string characters out of 6134896
- 172394 words of memory out of 5000000
- 8648 multiletter control sequences out of 15000+600000
- 16422 words of font info for 59 fonts, out of 8000000 for 9000
+ 5283 strings out of 492982
+ 65225 string characters out of 6134896
+ 175137 words of memory out of 5000000
+ 8708 multiletter control sequences out of 15000+600000
+ 19000 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 33i,11n,60p,308b,2010s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 33i,11n,60p,367b,2009s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu30.pfb></usr/
 share/texmf/fonts/type1/arphic/bsmiu/bsmiu4e.pfb></usr/share/texmf/fonts/type1/
 arphic/bsmiu/bsmiu4f.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu50.pfb
 ></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu52.pfb></usr/share/texmf/fonts
 /type1/arphic/bsmiu/bsmiu53.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmi
-u57.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu59.pfb></usr/share/texm
-f/fonts/type1/arphic/bsmiu/bsmiu5c.pfb></usr/share/texmf/fonts/type1/arphic/bsm
-iu/bsmiu62.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu63.pfb></usr/sha
-re/texmf/fonts/type1/arphic/bsmiu/bsmiu65.pfb></usr/share/texmf/fonts/type1/arp
-hic/bsmiu/bsmiu6a.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu6b.pfb></
-usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu6e.pfb></usr/share/texmf/fonts/ty
-pe1/arphic/bsmiu/bsmiu76.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu7b
-.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu7c.pfb></usr/share/texmf/f
-onts/type1/arphic/bsmiu/bsmiu89.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/
-bsmiu8f.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu90.pfb></usr/share/
-texmf/fonts/type1/arphic/bsmiu/bsmiuff.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on lab5.pdf (3 pages, 149542 bytes).
+u56.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu57.pfb></usr/share/texm
+f/fonts/type1/arphic/bsmiu/bsmiu59.pfb></usr/share/texmf/fonts/type1/arphic/bsm
+iu/bsmiu5c.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu62.pfb></usr/sha
+re/texmf/fonts/type1/arphic/bsmiu/bsmiu63.pfb></usr/share/texmf/fonts/type1/arp
+hic/bsmiu/bsmiu65.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu66.pfb></
+usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu67.pfb></usr/share/texmf/fonts/ty
+pe1/arphic/bsmiu/bsmiu6a.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu6b
+.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu6e.pfb></usr/share/texmf/f
+onts/type1/arphic/bsmiu/bsmiu70.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/
+bsmiu76.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu7b.pfb></usr/share/
+texmf/fonts/type1/arphic/bsmiu/bsmiu7c.pfb></usr/share/texmf/fonts/type1/arphic
+/bsmiu/bsmiu7d.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu80.pfb></usr
+/share/texmf/fonts/type1/arphic/bsmiu/bsmiu89.pfb></usr/share/texmf/fonts/type1
+/arphic/bsmiu/bsmiu8b.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu8f.pf
+b></usr/share/texmf/fonts/type1/arphic/bsmiu/bsmiu90.pfb></usr/share/texmf/font
+s/type1/arphic/bsmiu/bsmiu97.pfb></usr/share/texmf/fonts/type1/arphic/bsmiu/bsm
+iuff.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on lab5.pdf (3 pages, 183474 bytes).
 PDF statistics:
- 152 PDF objects out of 1000 (max. 8388607)
- 95 compressed objects within 1 object stream
+ 193 PDF objects out of 1000 (max. 8388607)
+ 119 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 89 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 121 words of extra memory for PDF output out of 10000 (max. 10000000)
 

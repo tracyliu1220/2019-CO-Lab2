@@ -11,8 +11,8 @@
 \title{
     \textbf{2019 Spring NCTU Computer Organization} \\
     \large Lab5 Report \\
-    \small Tracy Liu
-    \author Tracy Liu
+    \small Tracy Liu, Chieh Nien
+    \author Tracy Liu, Chieh Nien
     \date{}
 }
 
@@ -46,39 +46,41 @@
         \end{center}
         \subsection{One-word-wide memory organization}
             $
-            \begin{aligned} 
-            hit\_cycles  & = t_{sa} + t_{al} + t_{sw} \\ 
+            \begin{aligned}
+            hit\_cycles  & = t_{sa} + t_{al} + t_{sw} \\
                          & = 1 + 2 + 1 = 4 \\
             miss\_cycles & = t_{sa} + 8 \times (t_{sa} + t_{am} + t_{sw} + t_{al}) + t_{al} + t_{sw} \\
                          & = 1 + 8 \times (1 + 100 + 1 + 2) + 2 + 1 = 836 \\
-            \end{aligned}  
+            \end{aligned}
             $
         \subsection{Wider memory organization}
             $
-            \begin{aligned} 
-            hit\_cycles & = t_{sa} + t_{al} + t_{sw} \\ 
+            \begin{aligned}
+            hit\_cycles & = t_{sa} + t_{al} + t_{sw} \\
                        & = 1 + 2 + 1 = 4 \\
             miss\_cycles & = t_{sa} + (t_{sa} + t_{am} + t_{sw} + t_{al}) + t_{al} + t_{sw} \\
                         & = 1 + (1 + 100 + 1 + 2) + 2 + 1 = 108 \\
-            \end{aligned} 
+            \end{aligned}
             $
         \subsection{Two-level memory organization}
             $
-            \begin{aligned} 
-            hit\_cycles         & = t_{sa} + t_{al1} + t_{sw} \\ 
+            \begin{aligned}
+            hit\_cycles         & = t_{sa} + t_{al1} + t_{sw} \\
                                & = 1 + 1 + 1 = 3 \\
             L1\_miss\_cycles     & = t_{sa} + (t_{sa} + t_{al2} + t_{sw} + t_{al1}) + t_{al1} + t_{sw} \\
                                & = 1 + 4 \times (1 + 10 + 1 + 1) + 1 + 1 = 55 \\
             global\_miss\_cycles & = t_{sa} + 32 \times (t_{sa} + t_{am} + t_{sw} + t_{al2}) + 4 \times (t_{sa} + t_{al2} + t_{sw} + t_{al1}) + t_{al1} + t_{sw} \\
                                & = 1 + 32 \times (1 + 100 + 1 + 10) + 4 \times (1 + 10 + 1 + 1) + 1 + 1 = 3639 \\
-            \end{aligned} 
+            \end{aligned}
             $
     \newpage
     \section{Differences among Memory Organizations}
-        We can see that increasing bandwidth indeed reduce the miss penalty (from 836 to 108).         While with using L-2 cache, the L-2 miss penalty is much higher, so we need to focus on reducing miss rate to avoid total memory stall cycle higher then original memory organizations (Fig1.(a)).
-
+        \begin{itemize}
+            \item Wider memory organization 因為有比較大的 bandwidth 所以可以一次傳輸多個 words 的 data，減少 data transfer 需要的 cycles，而 2 level memory organization 可以讓某些在 L1 或 L2 hit 的 address 以更少的 cycles 傳輸給 processor。
+            \item We can see that increasing bandwidth indeed reduce the miss penalty (from 836 to 108). While with using L-2 cache, the L-2 miss penalty is much higher, so we need to focus on reducing miss rate to avoid total memory stall cycle higher then original memory organizations (Fig1.(a)).
+        \end{itemize}
     \section{Bonus}
-        \subsection{matmul.txt C++ style code} 
+        \subsection{matmul.txt C++ style code}
         \begin{lstlisting}[language=C++]
         for (i = 0; i < m; i ++) {
             for (j = 0; j < p; j ++) {
@@ -93,7 +95,7 @@
         }
         \end{lstlisting}
 
-        \subsection{bonus\_matmul.txt C++ style code} 
+        \subsection{bonus\_matmul.txt C++ style code}
         \begin{lstlisting}[language=C++]
         for (i = 0; i < m; i ++) {
             for (j = 0; j < n; j ++) {
@@ -107,7 +109,7 @@
             }
         }
         \end{lstlisting}
-        
+
         \newpage
         \subsection{Explanation}
             我們將 load A[i][j] 提到第二層迴圈，這樣就可以將原來要 load A[i][j] $m \times n \times p$ 次減少到 $m \times n$ 次，減少 require data 的次數。
@@ -115,6 +117,6 @@
             \textbf{Compiling:} make bonus \\
             \textbf{Execution:} ./simulate\_caches [input\_filename] [output\_filename] \\
             the output format is exactly the same as the original one. \\
-            
+
     \end{CJK*}
 \end{document}
