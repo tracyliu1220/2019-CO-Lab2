@@ -74,11 +74,26 @@
             \end{aligned}
             $
     \newpage
+    \section{Results of Calculations}
+        \begin{center}
+            \begin{tabular}{crrrr}
+            \hline
+                Testcases & Exe Cycles & One-word-wide & Wider & 2-level \\
+            \hline
+                a1xb1 & 1553    & 6016      & 1648     & 12144 \\
+                a2xb2 & 6141    & 19072     & 5968     & 32736 \\
+                a3xb3 & 183925  & 7626560   & 1068008  & 791552 \\
+                a4xb4 & 5781957 & 251426432 & 35098320 & 998152040 \\
+            \hline
+            \end{tabular}
+        \end{center}
     \section{Differences among Memory Organizations}
         \begin{itemize}
             \item Wider memory organization 因為有比較大的 bandwidth 所以可以一次傳輸多個 words 的 data，減少 data transfer 需要的 cycles，而 2 level memory organization 可以讓某些在 L1 或 L2 hit 的 address 以更少的 cycles 傳輸給 processor。
             \item We can see that increasing bandwidth indeed reduce the miss penalty (from 836 to 108). While with using L-2 cache, the L-2 miss penalty is much higher, so we need to focus on reducing miss rate to avoid total memory stall cycle higher then original memory organizations (Fig1.(a)).
         \end{itemize}
+
+
     \section{Bonus}
         \subsection{matmul.txt C++ style code}
         \begin{lstlisting}[language=C++]
@@ -95,6 +110,8 @@
         }
         \end{lstlisting}
 
+        \newpage
+
         \subsection{bonus\_matmul.txt C++ style code}
         \begin{lstlisting}[language=C++]
         for (i = 0; i < m; i ++) {
@@ -110,13 +127,26 @@
         }
         \end{lstlisting}
 
-        \newpage
         \subsection{Explanation}
             我們將 load A[i][j] 提到第二層迴圈，這樣就可以將原來要 load A[i][j] $m \times n \times p$ 次減少到 $m \times n$ 次，減少 require data 的次數。
         \subsection{Test and Delay Cycles Calculations for Bonus}
             \textbf{Compiling:} make bonus \\
             \textbf{Execution:} ./simulate\_caches [input\_filename] [output\_filename] \\
             the output format is exactly the same as the original one. \\
+
+        \subsection{Results of Bonus}
+            \begin{center}
+                \begin{tabular}{crrrr}
+                \hline
+                    Testcases & Exe Cycles & One-word-wide & Wider & 2-level \\
+                \hline
+                    a1xb1 & 1313    & 5824     & 1456    & 12000 \\
+                    a2xb2 & 4797    & 18176    & 5072    & 32064 \\
+                    a3xb3 & 142453  & 1032000  & 215912  & 454912 \\
+                    a4xb4 & 4555205 & 31508096 & 6719696 & 40791860 \\
+                \hline
+                \end{tabular}
+            \end{center}
 
     \end{CJK*}
 \end{document}
