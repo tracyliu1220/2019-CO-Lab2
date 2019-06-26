@@ -6,6 +6,7 @@
 \usepackage{CJKutf8}
 \usepackage{amsmath}
 \usepackage{listings}
+%\usepackage{indentfirst}
 
 \title{
     \textbf{2019 Spring NCTU Computer Organization} \\
@@ -19,6 +20,7 @@
 \setlength{\columnsep}{1cm}
 \setlength{\baselineskip}{100pt}
 \linespread{1.2}
+%\setlength{\parindent}{4em}
 
 \begin{document}
     \begin{CJK*}{UTF8}{bsmi}
@@ -73,9 +75,10 @@
             $
     \newpage
     \section{Differences among Memory Organizations}
+        We can see that increasing bandwidth indeed reduce the miss penalty (from 836 to 108).         While with using L-2 cache, the L-2 miss penalty is much higher, so we need to focus on reducing miss rate to avoid total memory stall cycle higher then original memory organizations (Fig1.(a)).
 
     \section{Bonus}
-        \subsection{matmul.txt} 
+        \subsection{matmul.txt C++ style code} 
         \begin{lstlisting}[language=C++]
         for (i = 0; i < m; i ++) {
             for (j = 0; j < p; j ++) {
@@ -90,7 +93,7 @@
         }
         \end{lstlisting}
 
-        \subsection{bonus.txt} 
+        \subsection{bonus\_matmul.txt C++ style code} 
         \begin{lstlisting}[language=C++]
         for (i = 0; i < m; i ++) {
             for (j = 0; j < n; j ++) {
@@ -104,6 +107,14 @@
             }
         }
         \end{lstlisting}
-
+        
+        \newpage
+        \subsection{Explanation}
+            我們將 load A[i][j] 提到第二層迴圈，這樣就可以將原來要 load A[i][j] $m \times n \times p$ 次減少到 $m \times n$ 次，減少 require data 的次數。
+        \subsection{Test and Delay Cycles Calculations for Bonus}
+            \textbf{Compiling:} make bonus \\
+            \textbf{Execution:} ./simulate\_caches [input\_filename] [output\_filename] \\
+            the output format is exactly the same as the original one. \\
+            
     \end{CJK*}
 \end{document}
